@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Valentine?</title>
+  <title>For Dilpreet ❤️</title>
+
   <style>
     body {
       margin: 0;
@@ -11,70 +12,110 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      background: url('lilies.jpg') center/cover no-repeat fixed;
       overflow: hidden;
+      color: white;
+    }
+
+    /* Background slideshow */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      transition: background-image 1s ease-in-out;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+      z-index: -1;
     }
 
     .card {
-      background: white;
+      background: rgba(0,0,0,0.6);
       padding: 40px;
-      border-radius: 20px;
+      border-radius: 25px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      max-width: 420px;
       width: 90%;
-      position: relative;
     }
 
     h1 {
-      color: #e91e63;
-      margin-bottom: 20px;
+      font-size: 28px;
+      color: #ffb7c5;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.9;
     }
 
     .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
+      margin-top: 25px;
       position: relative;
+      height: 60px;
     }
 
     button {
       border: none;
-      padding: 12px 20px;
+      padding: 12px 22px;
       font-size: 16px;
       border-radius: 30px;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
+      transition: 0.3s ease;
+      position: absolute;
     }
 
     .yes {
-      background: #e91e63;
+      background: #ff4d6d;
       color: white;
+      left: 25%;
     }
 
     .yes:hover {
       transform: scale(1.1);
-      background: #d81b60;
     }
 
     .no {
-      background: #eee;
-      position: absolute;
+      background: #ddd;
+      left: 55%;
     }
 
     .message {
       margin-top: 20px;
       font-size: 18px;
-      color: #444;
       display: none;
+      line-height: 1.6;
+    }
+
+    .eyes-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      z-index: -1;
     }
 
     .hearts {
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
@@ -83,34 +124,71 @@
 
     .heart {
       position: absolute;
-      color: #ff4d6d;
       font-size: 24px;
-      animation: float 5s linear infinite;
+      animation: float 6s linear infinite;
     }
 
     @keyframes float {
-      from { transform: translateY(100vh) scale(1); opacity: 1; }
-      to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
+  <!-- Background images of her & cat -->
+  <div class="background" id="bg"></div>
+  <div class="overlay"></div>
+
+  <!-- Eyes reveal background -->
+  <div class="eyes-bg" id="eyes"></div>
+
   <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
+    <h1>Dilpreet, will you be my Valentine? ❤️</h1>
+    <p>I made something small… but from my whole heart.</p>
+
     <div class="buttons">
-      <button class="yes" onclick="sayYes()">Yes</button>
-      <button class="no" id="noBtn" onmouseover="moveNo()">No</button>
+      <button class="yes" onclick="sayYes()">Yes 💖</button>
+      <button class="no" id="noBtn" onmouseover="moveNo()">No 🙈</button>
     </div>
-    <div class="message" id="message">Yay! You just made me the happiest person alive ❤️</div>
+
+    <div class="message" id="message">
+      From the moment you walked into my life, everything felt softer, calmer, and more beautiful.
+      <br><br>
+      Your smile is my favorite place, your eyes hold a universe I never want to leave,
+      and every little moment with you feels like a memory I want forever.
+      <br><br>
+      So today… and every day after this…
+      <br>
+      I choose you. ❤️
+    </div>
   </div>
 
   <div class="hearts" id="hearts"></div>
 
+  <!-- Romantic music -->
+  <audio id="music" loop>
+    <source src="tere-naina.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    function sayYes() {
-      document.getElementById('message').style.display = 'block';
-      createHearts();
+    const images = [
+      'photo1.gif',
+      'photo2.gif',
+      'cat1.gif',
+      'cat2.gif'
+    ];
+
+    let index = 0;
+    const bg = document.getElementById('bg');
+
+    function changeBackground() {
+      bg.style.backgroundImage = `url('${images[index]}')`;
+      index = (index + 1) % images.length;
     }
+
+    setInterval(changeBackground, 3000);
+    changeBackground();
 
     function moveNo() {
       const btn = document.getElementById('noBtn');
@@ -119,17 +197,28 @@
       btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    function createHearts() {
-      const heartsContainer = document.getElementById('hearts');
-      for (let i = 0; i < 30; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        heart.innerHTML = '❤';
-        heartsContainer.appendChild(heart);
+    function sayYes() {
+      document.getElementById('message').style.display = 'block';
 
-        setTimeout(() => heart.remove(), 5000);
+      const eyes = document.getElementById('eyes');
+      eyes.style.backgroundImage = "url('eyes.gif')";
+      eyes.style.opacity = 0.7;
+
+      document.getElementById('music').play();
+
+      createHearts();
+    }
+
+    function createHearts() {
+      const hearts = document.getElementById('hearts');
+      for (let i = 0; i < 40; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        h.innerHTML = '❤️';
+        hearts.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
       }
     }
   </script>
