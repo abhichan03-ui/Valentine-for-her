@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Dilpreet ❤️</title>
+  <title>For Dillu ❤️</title>
 
   <style>
     body {
@@ -13,12 +13,11 @@
       align-items: center;
       justify-content: center;
       font-family: 'Segoe UI', sans-serif;
-      background: url('lilies.jpg') center/cover no-repeat fixed;
+      background: url('lillies.jpg') center/cover no-repeat fixed;
       overflow: hidden;
       color: white;
     }
 
-    /* Background slideshow */
     .background {
       position: fixed;
       top: 0;
@@ -59,9 +58,7 @@
       margin-bottom: 10px;
     }
 
-    p {
-      opacity: 0.9;
-    }
+    p { opacity: 0.9; }
 
     .buttons {
       margin-top: 25px;
@@ -79,20 +76,10 @@
       position: absolute;
     }
 
-    .yes {
-      background: #ff4d6d;
-      color: white;
-      left: 25%;
-    }
+    .yes { background: #ff4d6d; color: white; left: 25%; }
+    .yes:hover { transform: scale(1.1); }
 
-    .yes:hover {
-      transform: scale(1.1);
-    }
-
-    .no {
-      background: #ddd;
-      left: 55%;
-    }
+    .no { background: #ddd; left: 55%; }
 
     .message {
       margin-top: 20px;
@@ -136,15 +123,12 @@
 </head>
 
 <body>
-  <!-- Background images of her & cat -->
   <div class="background" id="bg"></div>
   <div class="overlay"></div>
-
-  <!-- Eyes reveal background -->
   <div class="eyes-bg" id="eyes"></div>
 
   <div class="card">
-    <h1>Dilpreet, will you be my Valentine? ❤️</h1>
+    <h1>Dillu, will you be my Valentine? ❤️</h1>
     <p>I made something small… but from my whole heart.</p>
 
     <div class="buttons">
@@ -166,17 +150,17 @@
 
   <div class="hearts" id="hearts"></div>
 
-  <!-- Romantic music -->
   <audio id="music" loop>
     <source src="tere-naina.mp3" type="audio/mpeg">
   </audio>
 
   <script>
     const images = [
-      'photo1.gif',
-      'photo2.gif',
-      'cat1.gif',
-      'cat2.gif'
+      'photo1.jpg',
+      'photo2.jpg',
+      'photo3.jpg',
+      'cat1.jpg',
+      'cat2.jpg'
     ];
 
     let index = 0;
@@ -201,7 +185,7 @@
       document.getElementById('message').style.display = 'block';
 
       const eyes = document.getElementById('eyes');
-      eyes.style.backgroundImage = "url('eyes.gif')";
+      eyes.style.backgroundImage = "url('eyes.jpg')";
       eyes.style.opacity = 0.7;
 
       document.getElementById('music').play();
