@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Dillu ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('lillies.jpg') center/cover no-repeat fixed;
+      overflow: hidden;
+      color: white;
+    }
+
+    /* Slideshow visible BEFORE YES */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45; /* make images visible */
+      transition: background-image 1s ease-in-out;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: -1;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.6);
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    h1 { font-size: 28px; color: #ffb7c5; margin-bottom: 10px; }
+    p { opacity: 0.9; }
+
+    .buttons { margin-top: 25px; position: relative; height: 60px; }
+
+    button {
+      border: none;
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      position: absolute;
+    }
+
+    .yes { background: #ff4d6d; color: white; left: 25%; }
+    .yes:hover { transform: scale(1.1); }
+    .no { background: #ddd; left: 55%; }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+      line-height: 1.6;
+    }
+
+    /* Eyes image appears AFTER YES */
+    .eyes-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 2s ease;
+      z-index: -1;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Slideshow BEFORE yes -->
+  <div class="background" id="bg"></div>
+  <div class="overlay"></div>
+
+  <!-- Eyes AFTER yes -->
+  <div class="eyes-bg" id="eyes"></div>
+
+  <div class="card">
+    <h1>Dillu, will you be my Valentine? ❤️</h1>
+    <p>I made something small… but from my whole heart.</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Yes 💖</button>
+      <button class="no" id="noBtn" onmouseover="moveNo()">No 🙈</button>
+    </div>
+
+    <div class="message" id="message">
+      From the moment you walked into my life, everything felt softer, calmer, and more beautiful.
+      <br><br>
+      Your smile is my favorite place, your eyes hold a universe I never want to leave,
+      and every little moment with you feels like a memory I want forever.
+      <br><br>
+      So today… and every day after this…
+      <br>
+      I choose you. ❤️
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <audio id="music" loop>
+    <source src="tere-naina.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    /* slideshow images BEFORE yes */
+    const images = [
+      'photo1.jpg',
+      'photo2.jpg',
+      'photo3.jpg',
+      'cat1.jpg',
+      'cat2.jpg'
+    ];
+
+    let index = 0;
+    const bg = document.getElementById('bg');
+
+    function changeBackground() {
+      bg.style.backgroundImage = `url('${images[index]}')`;
+      index = (index + 1) % images.length;
+    }
+
+    setInterval(changeBackground, 3000);
+    changeBackground();
+
+    function moveNo() {
+      const btn = document.getElementById('noBtn');
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function sayYes() {
+      document.getElementById('message').style.display = 'block';
+
+      /* show eyes AFTER yes */
+      const eyes = document.getElementById('eyes');
+      eyes.style.backgroundImage = "url('eyes.jpg')";
+      eyes.style.opacity = 0.8;
+
+      document.getElementById('music').play();
+      createHearts();
+    }
+
+    function createHearts() {
+      const hearts = document.getElementById('hearts');
+      for (let i = 0; i < 40; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        h.innerHTML = '❤️';
+        hearts.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+      }
+    }
+  </script>
+</body>
+</html>
